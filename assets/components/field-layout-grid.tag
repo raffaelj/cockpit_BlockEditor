@@ -4,16 +4,21 @@
         <a class="uk-button uk-button-link" onclick="{ addColumn }">{ App.i18n.get('Add Column') }</a>
     </div>
 
-    <div class="uk-sortable uk-grid uk-grid-match uk-grid-small uk-grid-width-medium-1-{columns.length > 5 ? 1 : columns.length}" show="{columns.length}" ref="columns" data-uk-sortable="animation:false">
-        <div class="uk-grid-margin" each="{column,idx in columns}">
-            <div class="uk-panel">
-                <div class="uk-flex uk-flex-middle uk-text-small uk-visible-hover">
-                    <div class="uk-flex-item-1 uk-margin-small-right"><a class="uk-text-muted uk-text-uppercase field-layout-column-label" onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }"><i class="uk-icon-columns" alt="Column {(idx+1)}"></i> { (idx+1) }</a></div>
-                    <a class="uk-invisible uk-margin-small-right" onclick="{ parent.cloneColumn }" title="{ App.i18n.get('Clone Column') }"><i class="uk-icon-clone"></i></a>
-                    <a class="uk-invisible uk-margin-small-right" onclick="{ parent.addColumn }" title="{ App.i18n.get('Add Column') }"><i class="uk-icon-plus"></i></a>
-                    <a class="uk-invisible" onclick="{ parent.remove }"><i class="uk-text-danger uk-icon-trash-o"></i></a>
+    <div class="uk-sortable uk-grid uk-grid-match uk-grid-small uk-grid-width-medium-1-{columns.length > 5 ? 1 : columns.length}" show="{columns.length}" ref="columns" data-uk-sortable="animation:false, handleClass:'field-layout-handle'">
+        <div class="uk-grid-margin " each="{column,idx in columns}">
+            <div class="layout-component">
+
+                <i class="field-layout-handle uk-icon-arrows" title="{ App.i18n.get('Drag Component') }"></i>
+
+                <div class="uk-flex uk-flex-middle layout-component-topbar">
+                    <div class="uk-flex-item-1 uk-margin-small-right">
+                        <a class="uk-text-muted uk-text-uppercase uk-text-small uk-text-bold" onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }"><i class="uk-icon-columns" alt="Column {(idx+1)}"></i> { App.i18n.get('Column') } { (idx+1) }</a>
+                    </div>
+                    <a class="uk-margin-small-right" onclick="{ parent.cloneColumn }" title="{ App.i18n.get('Clone Column') }"><i class="uk-icon-clone"></i></a>
+                    <a class="uk-margin-small-right" onclick="{ parent.addColumn }" title="{ App.i18n.get('Add Column') }"><i class="uk-icon-plus"></i></a>
+                    <a class="" onclick="{ parent.remove }"><i class="uk-text-danger uk-icon-trash-o"></i></a>
                 </div>
-                <div class="uk-margin">
+                <div class="">
                     <field-layout bind="columns[{idx}].children" child="true" components="{ opts.components }" exclude="{ opts.exclude }" preview="{opts.preview}"></field-layout>
                 </div>
             </div>
@@ -114,7 +119,6 @@
                     $this.update();
                 }, 50);
             });
-
 
             this.update();
         });

@@ -1,31 +1,69 @@
 <field-layout>
 
-    <div class="uk-sortable layout-components {!items.length && 'empty'}" ref="components" data-uk-sortable="animation:false, group:'field-layout-items'">
+    <div class="uk-sortable layout-components {!items.length && 'empty'}" ref="components" data-uk-sortable="animation:250, group:'field-layout-items', handleClass:'field-layout-handle'">
 
-        <div class="uk-panel-box uk-panel-card" each="{ item,idx in items }" data-idx="{idx}">
+        <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}">
 
-            <div class="uk-flex uk-flex-middle uk-text-small uk-visible-hover">
-                <img class="uk-margin-small-right" riot-src="{ parent.components[item.component].icon ? parent.components[item.component].icon : App.base('/assets/app/media/icons/component.svg')}" width="16">
-                <div class="uk-text-bold uk-text-truncate uk-flex-item-1">
-                    <a class="uk-link-muted" onclick="{ parent.settings }">{ item.name || parent.components[item.component].label || App.Utils.ucfirst(item.component) }</a>
+            <i class="field-layout-handle uk-icon-arrows" title="{ App.i18n.get('Drag Component') }"></i>
+            <div if="{ typeof components[item.component] != 'undefined' }">
+                <div class="uk-flex uk-flex-middle layout-component-topbar">
+
+                    <div class="uk-flex-item-1 ">
+                        <img class="uk-margin-small-right" riot-src="{ parent.components[item.component].icon ? parent.components[item.component].icon : App.base('/assets/app/media/icons/component.svg')}" width="16">
+                        <span class="uk-text-muted uk-text-uppercase uk-text-small uk-text-bold">{ item.name || parent.components[item.component].label || App.Utils.ucfirst(item.component) }</span>
+                    </div>
+                    <div class="">
+                        <a onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }"><i class="uk-icon-gear"></i></a>
+                        <a class="uk-margin-small-left" onclick="{ parent.cloneComponent }" title="{ App.i18n.get('Clone Component') }"><i class="uk-icon-clone"></i></a>
+                        <a class="uk-margin-small-left" onclick="{ parent.addComponent }" title="{ App.i18n.get('Add Component') }"><i class="uk-icon-plus"></i></a>
+                        <a class="uk-margin-small-left uk-text-danger" onclick="{ parent.remove }"><i class="uk-icon-trash-o"></i></a>
+                    </div>
                 </div>
-                <div class="uk-text-small uk-invisible">
-                    <a onclick="{ parent.cloneComponent }" title="{ App.i18n.get('Clone Component') }"><i class="uk-icon-clone"></i></a>
-                    <a class="uk-margin-small-left" onclick="{ parent.addComponent }" title="{ App.i18n.get('Add Component') }"><i class="uk-icon-plus"></i></a>
-                    <a class="uk-margin-small-left uk-text-danger" onclick="{ parent.remove }"><i class="uk-icon-trash-o"></i></a>
+
+                <div class="" if="{parent.components[item.component].children}">
+                    <field-layout bind="items[{idx}].children" child="true" parent-component="{parent.components[item.component]}" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout>
                 </div>
+
+                <div class="" if="{item.component == 'grid'}">
+                    <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout-grid>
+                </div>
+
+                <div data-is="layout-field-{ item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ layoutFields.indexOf('layout-field-'+item.component) > -1 }"></div>
+
+                <div class="uk-grid uk-grid-small uk-grid-match" if="{ layoutFields.indexOf('layout-field-'+item.component) == -1 }">
+
+                    <div class="uk-width-medium-{field.width || '1-1' }" each="{field,idy in (this.components[item.component].fields || []).concat(this.generalSettingsFields)}" if="{ !field.group || field.group == 'Main' || field.group == 'main' }" no-reorder>
+
+
+                        <label class="uk-text-small uk-text-bold"><i class="uk-icon-pencil-square uk-margin-small-right"></i> { field.label || field.name }</label>
+
+                        <div class="uk-margin-small-top uk-text-small uk-text-muted" show="{field.info}">{ field.info }</div>
+
+                        <div class="uk-margin-small-top">
+                            <cp-field type="{field.type || 'text'}" bind="items[{idx}].settings.{field.name}" opts="{ field.options || {} }"></cp-field>
+                        </div>
+
+
+                    </div>
+                </div>
+
             </div>
+            <div if="{ typeof components[item.component] == 'undefined' }">
+                <div class="uk-flex uk-flex-middle layout-component-topbar">
 
-            <div class="uk-margin" if="{parent.components[item.component].children}">
-                <field-layout bind="items[{idx}].children" child="true" parent-component="{parent.components[item.component]}" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout>
+                    <div class="uk-flex-item-1 ">
+                        <i class="uk-icon-warning"></i>
+                        <span class="uk-text-muted uk-text-uppercase uk-text-small uk-text-bold uk-text-warning">{ App.i18n.get('Unknown component') }</span>
+                    </div>
+                    <div class="">
+<!--                         <a onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }"><i class="uk-icon-gear"></i></a> -->
+                        <a class="uk-margin-small-left" onclick="{ parent.cloneComponent }" title="{ App.i18n.get('Clone Component') }"><i class="uk-icon-clone"></i></a>
+                        <a class="uk-margin-small-left" onclick="{ parent.addComponent }" title="{ App.i18n.get('Add Component') }"><i class="uk-icon-plus"></i></a>
+                        <a class="uk-margin-small-left uk-text-danger" onclick="{ parent.remove }"><i class="uk-icon-trash-o"></i></a>
+                    </div>
+                </div>
+                <pre><code>{ JSON.stringify(item, false, 2); }</code></pre>
             </div>
-
-            <div class="uk-margin" if="{item.component == 'grid'}">
-                <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout-grid>
-            </div>
-
-            <raw class="layout-field-preview uk-text-small uk-text-muted" content="{getPreview(item)}" if="{showPreview}"></raw>
-
         </div>
     </div>
 
@@ -114,6 +152,13 @@
 
         riot.util.bind(this);
 
+        this.layoutFields = Object.keys(riot.tags).filter(function(key) {
+            return (/^layout-field-/).test(key);
+        });
+
+        this.isSorting = false;
+//         this.isModalOpen = false;
+
         this.mode = 'edit';
         this.items = [];
         this.settingsComponent = null;
@@ -167,7 +212,8 @@
                 "fields": [
                     {"name": "image", "type": "image", "default": {}},
                     {"name": "width", "type": "text", "default": ""},
-                    {"name": "height", "type": "text", "default": ""}
+                    {"name": "height", "type": "text", "default": ""},
+                    {"name": "align", "type": "select", "default": "", "options": {"options": ["left", "center", "right"]}}
                 ]
             },
 
@@ -202,7 +248,56 @@
             opts = App.$.extend(true, {}, opts.parentComponent.options, opts);
         }
 
-        
+        this.emphasizeComponent = function(e) {
+            if ($this.isSorting) return;
+            e.stopPropagation();
+            e.currentTarget.classList.add('layout-component-active');
+        };
+
+        this.deemphasizeComponent = function(e) {
+            if ($this.isSorting) return;
+            e.currentTarget.classList.remove('layout-component-active');
+        };
+
+        this.focusComponent = function(e) {
+            $this.emphasizeComponent(e);
+            $this.trigger('focuscomponent', e);
+        };
+
+        this.leaveComponent = function(e) {
+
+// console.log('leaveComponent', e);
+// console.log('currentTarget', e.currentTarget);
+// console.log('relatedTarget', e.relatedTarget);
+
+            if (e.relatedTarget && e.relatedTarget.closest('.uk-modal')) {
+                console.log('left focus to any modal');
+                return;
+            }
+
+            if (e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) {
+                console.log('left focus to inner element');
+                return;
+            }
+
+            if ($this.refs.modalSettings.contains(e.relatedTarget)) {
+                console.log('left focus to settings modal');
+            }
+
+            $this.deemphasizeComponent(e);
+
+            $this.trigger('leavecomponent', e);
+        };
+
+        this.addActiveStateEvents = function() {
+            App.$('.layout-component:not([id])')
+                .attr('id', 'component_'+Math.ceil(Math.random()*10000000))
+                .mouseover($this.emphasizeComponent)
+                .mouseout($this.deemphasizeComponent)
+                .focusin($this.focusComponent)
+                .focusout($this.leaveComponent);
+        };
+
         this.on('mount', function() {
 
             this.showPreview = opts.preview === undefined ? true : opts.preview;
@@ -231,15 +326,44 @@
 
             window.___moved_layout_item = null;
 
-            App.$(this.refs.components).on('start.uk.sortable', function(e, sortable, el, placeholder) {
+            // set mouse events for active state
+            this.addActiveStateEvents();
 
+//             var editors = {};
+            App.$(this.refs.components).on('start.uk.sortable', function(e, sortable, el, placeholder) {
+console.log('start', el);
                 if (!el) return;
                 e.stopPropagation();
                 window.___moved_layout_item = {idx: el._tag.idx, item: el._tag.item, src: $this};
+
+                $this.isSorting = true;
+
+            }).on('stop.uk.sortable', function(e, sortable, el, placeholder) {
+console.log('stop');
+                $this.isSorting = false;
+
+                // destroy and recreate wysiwyg editors --> moved to layout-field-text.tag
+//                 tinymce.EditorManager.editors.forEach(function(editor) {
+// 
+//                     var editorId    = editor.id,
+//                         oldSettings = editor.settings,
+//                         editorEl    = document.getElementById(editorId);
+// 
+//                     if (editorEl && $this.refs.components.contains(editorEl)) {
+// // console.log(editorId);
+//                         tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
+//                         new tinymce.Editor(editorId, oldSettings, tinymce.EditorManager).render();
+// 
+//                     }
+// 
+//                 });
+// 
+//                 $this.update();
+
             });
 
             App.$(this.refs.components).on('change.uk.sortable', function(e, sortable, el, mode) {
-
+console.log('change', mode);
                 if (!el) return;
 
                 e.stopPropagation();
@@ -259,6 +383,8 @@
 
                             $this.$setValue(items);
                             $this.update();
+
+                            $this.trigger('componentmoved');
 
                             break;
 
@@ -282,13 +408,21 @@
                 }
             });
 
-            UIkit.modal(this.refs.modalSettings, {modal:false}).on('hide.uk.modal', function(e) {
+            UIkit.modal(this.refs.modalSettings, {modal:false}).on('show.uk.modal', function(e) {
+
+console.log('open settings modal');
+//                 $this.isModalOpen = true;
+//                 $this.update();
+
+            }).on('hide.uk.modal', function(e) {
 
                 if (e.target !== $this.refs.modalSettings) {
                     return;
                 }
 
                 $this.$setValue($this.items);
+
+//                 $this.isModalOpen = false;
 
                 setTimeout(function(){
                     $this.settingsComponent = null;
@@ -353,6 +487,8 @@
             this.items.splice(idx + 1, 0, item);
             this.$setValue(this.items);
 
+            this.addActiveStateEvents();
+
             setTimeout(function() {
                 if (opts.child) $this.propagateUpdate();
             }.bind(this));
@@ -390,6 +526,8 @@
             }
 
             this.$setValue(this.items);
+
+            this.addActiveStateEvents();
 
             setTimeout(function() {
 
@@ -481,14 +619,14 @@
                 var src = getPathUrl(component.settings.image.path),
                     url = component.settings.image.path.match(/^(http\:|https\:|\/\/)/) ? component.settings.image.path : encodeURI(SITE_URL+'/'+component.settings.image.path), 
                     html;
-                
+
                 html = '<canvas class="uk-responsive-width" width="50" height="50" style="background-image:url('+src+')"></canvas>';
 
                 return '<a href="'+url+'" data-uk-lightbox>'+html+'</a>';
             }
 
             if (component.component== 'gallery' && Array.isArray(component.settings.gallery) && component.settings.gallery.length) {
-                
+
                 var html = [], url, src;
 
                 html.push('<div class="uk-flex">');
@@ -519,7 +657,7 @@
             } else {
                 src = App.route('/cockpit/utils/thumb_url?src='+url+'&w=50&h=50&m=bestFit&re=1');
             }
-            
+
             if (src.match(/\.(svg|ico)$/i)) {
                 src = url;
             }
