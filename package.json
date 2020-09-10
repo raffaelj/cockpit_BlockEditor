@@ -1,0 +1,17 @@
+{
+    "name": "cockpit-layoutfieldadvanced",
+    "version": "0.1.0",
+    "author": "Raffael Jesche",
+    "homepage": "https://github.com/raffaelj/cockpit_LayoutFieldAdvanced",
+    "license": "MIT",
+    "description": "Advanced layout field for Cockpit CMS",
+    "scripts": {
+        "build": "npm run build:sass",
+        "watch": "npm run watch:sass",
+        "build:sass": "node-sass -r --source-map true --output-style compressed assets/css/style.scss assets/css/style.min.css",
+        "watch:sass": "npm run build:sass && npm run build:sass -- -w"
+    },
+    "devDependencies": {
+        "node-sass": "^4.13.1"
+    }
+}

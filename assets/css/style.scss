@@ -1,0 +1,140 @@
+
+
+// from core layout field
+
+.uk-sortable-placeholder .uk-sortable {
+    pointer-events: none;
+}
+
+.layout-components {
+    &.empty {
+        min-height: 100px;
+        background: rgba(0,0,0,.01);
+
+        &:after {
+            font-family: FontAwesome;
+            content: "\f1b3";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 14px;
+            transform: translate3d(-50%, -50%, 0);
+            color: rgba(0,0,0,.3);
+        }
+    }
+}
+
+.layout-field-preview {
+    display: block;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px rgba(0,0,0,.05) dotted;
+    canvas {
+        background-size: contain; 
+        background-position: 50% 50%; 
+        background-repeat: no-repeat; 
+    }
+    &:empty {
+        display:none
+    }
+}
+
+
+// advanced
+
+
+.layout-component {
+    position: relative;
+    padding: 1em .5em .5em;
+    border-radius: 2px;
+    transition: background .5s ease-in-out;
+/*     z-index: 0; */
+    
+    .mce-top-part {
+        position: absolute;
+        bottom: 100%;
+        background: #fff;
+/*         margin-bottom: 3em; */
+    }
+}
+
+.field-layout-handle {
+    position: absolute;
+    top: -.7em;
+    left: 50%;
+    display: none;
+/*     z-index: 2; */
+    padding: .2em;
+    color: #dfdfdf;
+
+    &:hover {
+        font-size: 1.2em;
+        background-color: #fff;
+        color: #222;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        cursor: move;
+        margin-left: -.1em;
+
+/*        + .layout-component-topbar {
+            background-color: rgba(255,255,255,.5);
+            box-shadow: 0 -1px 2px #ccc;
+            > * {
+                visibility: visible;
+            }
+        }*/
+    }
+}
+
+.layout-component-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: .2em .4em;
+    margin-top: -1.8em;
+/*     z-index: 1; */
+
+    > * {
+        visibility: hidden;
+    }
+
+    &:hover {
+        background-color: rgba(255,255,255,.95);
+        box-shadow: 0 -1px 2px #ccc;
+
+        > *{
+            visibility: visible;
+        }
+    }
+}
+
+.layout-component-active {
+    background-color: rgba(255,255,255,.5);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+    z-index: 1;
+
+    &:hover > .field-layout-handle {
+/*     &:hover > div > .field-layout-handle { */
+        display: block;
+    }
+    > div > .layout-component-topbar {
+/*         z-index: 3; */
+        background-color: rgba(255,255,255,.5);
+        box-shadow: 0 -1px 2px #ccc;
+        > * {
+            visibility: visible;
+        }
+    }
+    .field-layout-handle {
+/*         z-index: 4; */
+    }
+}
+
+
+/* for debugging */
+/*        .layout-component {
+    background-color: rgba(0,255,255,.5);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+}*/
+

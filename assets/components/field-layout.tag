@@ -1,56 +1,5 @@
 <field-layout>
 
-    <style>
-
-        .layout-components > div {
-            margin-bottom: 5px;
-        }
-
-        .field-layout-column-label {
-            font-size: .8em;
-            font-weight: bold;
-        }
-
-        .uk-sortable-placeholder .uk-sortable {
-            pointer-events: none;
-        }
-
-        .layout-components.empty {
-            min-height: 100px;
-            background: rgba(0,0,0,.01);
-        }
-
-        .layout-components.empty:after {
-            font-family: FontAwesome;
-            content: "\f1b3";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            font-size: 14px;
-            transform: translate3d(-50%, -50%, 0);
-            color: rgba(0,0,0,.3);
-        }
-
-        .layout-field-preview {
-            display: block;
-            margin-top: 8px;
-            padding-top: 6px;
-            border-top: 1px rgba(0,0,0,.05) dotted;
-        }
-
-        .layout-field-preview canvas {
-            background-size: contain; 
-            background-position: 50% 50%; 
-            background-repeat: no-repeat; 
-        }
-
-        .layout-field-preview:empty {
-            display:none
-        }
-
-    </style>
-
-
     <div class="uk-sortable layout-components {!items.length && 'empty'}" ref="components" data-uk-sortable="animation:false, group:'field-layout-items'">
 
         <div class="uk-panel-box uk-panel-card" each="{ item,idx in items }" data-idx="{idx}">
