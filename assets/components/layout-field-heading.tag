@@ -1,6 +1,6 @@
 <layout-field-heading>
 
-    <raw show="{ mode == 'show' }" content="<{opts.item.settings.tag || 'h1'}>{ opts.item.settings.text }</{opts.item.settings.tag || 'h1'}>" onclick="{ edit }"></raw>
+    <raw show="{ mode == 'show' }" content="<{opts.item.settings.tag || 'h2'}>{ opts.item.settings.text }</{opts.item.settings.tag || 'h2'}>" onclick="{ edit }"></raw>
 
     <div ref="input" class="uk-flex uk-flex-middle" show="{ mode == 'edit' }">
         <field-text bind="{ opts.bind }.text" class="uk-flex-item-1"></field-text>
