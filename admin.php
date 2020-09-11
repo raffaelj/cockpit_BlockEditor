@@ -10,6 +10,8 @@ $this->on('admin.init', function() {
         'layoutfieldadvanced:assets/components/layout-field-heading.tag',
         'layoutfieldadvanced:assets/components/layout-field-image.tag',
         'layoutfieldadvanced:assets/components/layout-field-text.tag',
+        'layoutfieldadvanced:assets/components/layout-field-divider.tag',
+        'layoutfieldadvanced:assets/components/layout-field-button.tag',
     ]);
 
 });
