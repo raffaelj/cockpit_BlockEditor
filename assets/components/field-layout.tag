@@ -266,6 +266,7 @@
 
         this.leaveComponent = function(e) {
 
+console.log('leaveComponent');
 // console.log('leaveComponent', e);
 // console.log('currentTarget', e.currentTarget);
 // console.log('relatedTarget', e.relatedTarget);
@@ -337,6 +338,8 @@ console.log('start', el);
                 window.___moved_layout_item = {idx: el._tag.idx, item: el._tag.item, src: $this};
 
                 $this.isSorting = true;
+                
+                $this.trigger('component.move.before', el);
 
             }).on('stop.uk.sortable', function(e, sortable, el, placeholder) {
 console.log('stop');
