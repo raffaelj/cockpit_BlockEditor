@@ -12,6 +12,7 @@ $this->on('admin.init', function() {
         'layoutfieldadvanced:assets/components/layout-field-text.tag',
         'layoutfieldadvanced:assets/components/layout-field-divider.tag',
         'layoutfieldadvanced:assets/components/layout-field-button.tag',
+        'layoutfieldadvanced:assets/components/layout-field-html.tag',
     ]);
 
 });
