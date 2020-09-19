@@ -1,4 +1,4 @@
-<layout-field-html>
+<block-html>
     <style>
         .uk-invisible,
         .uk-invisible .uk-htmleditor-code,
@@ -103,4 +103,4 @@
 
     </script>
 
-</layout-field-html>
+</block-html>

@@ -28,9 +28,9 @@
                     <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout-grid>
                 </div>
 
-                <div data-is="layout-field-{ item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ layoutFields.indexOf('layout-field-'+item.component) > -1 }"></div>
+                <div data-is="block-{ item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ blocks.indexOf('block-'+item.component) > -1 }"></div>
 
-                <div class="uk-grid uk-grid-small uk-grid-match" if="{ layoutFields.indexOf('layout-field-'+item.component) == -1 }">
+                <div class="uk-grid uk-grid-small uk-grid-match" if="{ blocks.indexOf('block-'+item.component) == -1 }">
 
                     <div class="uk-width-medium-{field.width || '1-1' }" each="{field,idy in (this.components[item.component].fields || []).concat(this.generalSettingsFields)}" if="{ !field.group || field.group == 'Main' || field.group == 'main' }" no-reorder>
 
@@ -152,8 +152,8 @@
 
         riot.util.bind(this);
 
-        this.layoutFields = Object.keys(riot.tags).filter(function(key) {
-            return (/^layout-field-/).test(key);
+        this.blocks = Object.keys(riot.tags).filter(function(key) {
+            return (/^block-/).test(key);
         });
 
         this.isSorting = false;

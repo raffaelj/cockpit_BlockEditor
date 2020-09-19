@@ -1,4 +1,4 @@
-<layout-field-button>
+<block-button>
 
     <style>
         input[type=text].button-input {
@@ -60,4 +60,4 @@
 
     </script>
 
-</layout-field-button>
+</block-button>

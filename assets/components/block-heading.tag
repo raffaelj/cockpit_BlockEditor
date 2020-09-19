@@ -1,4 +1,4 @@
-<layout-field-heading>
+<block-heading>
 
     <raw show="{ mode == 'show' }" content="<{opts.item.settings.tag || 'h2'}>{ opts.item.settings.text }</{opts.item.settings.tag || 'h2'}>" onclick="{ edit }"></raw>
 
@@ -45,4 +45,4 @@
 
     </script>
 
-</layout-field-heading>
+</block-heading>

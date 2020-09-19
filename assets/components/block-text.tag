@@ -1,4 +1,4 @@
-<layout-field-text>
+<block-text>
 
     <raw show="{ mode == 'show' }" content="{ opts.item.settings.text }" onclick="{ edit }"></raw>
 
@@ -89,4 +89,4 @@
 
     </script>
 
-</layout-field-text>
+</block-text>

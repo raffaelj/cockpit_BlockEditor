@@ -7,12 +7,13 @@ $this->on('admin.init', function() {
 
         'blockeditor:assets/components/field-layout.tag',
         'blockeditor:assets/components/field-layout-grid.tag',
-        'blockeditor:assets/components/layout-field-heading.tag',
-        'blockeditor:assets/components/layout-field-image.tag',
-        'blockeditor:assets/components/layout-field-text.tag',
-        'blockeditor:assets/components/layout-field-divider.tag',
-        'blockeditor:assets/components/layout-field-button.tag',
-        'blockeditor:assets/components/layout-field-html.tag',
+
+        'blockeditor:assets/components/block-heading.tag',
+        'blockeditor:assets/components/block-image.tag',
+        'blockeditor:assets/components/block-text.tag',
+        'blockeditor:assets/components/block-divider.tag',
+        'blockeditor:assets/components/block-button.tag',
+        'blockeditor:assets/components/block-html.tag',
     ]);
 
 });

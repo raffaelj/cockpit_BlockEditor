@@ -1,4 +1,4 @@
-<layout-field-image>
+<block-image>
 
     <cp-thumbnail show="{ mode == 'show' }" src="{ (!opts.item.settings.image || !opts.item.settings.image.path) ? '' : (opts.item.settings.image.path.match(/^(http\:|https\:|\/\/)/) ? opts.item.settings.image.path : (SITE_URL+'/'+opts.item.settings.image.path.replace(/^\//, ''))) }" height="{ opts.item.settings.height ? opts.item.settings.height : (!opts.item.settings.width ? 160 : '') }" width="{ opts.item.settings.width || '' }" onclick="{ edit }" class="uk-text-{ opts.item.settings.align || 'center' }"></cp-thumbnail>
 
@@ -32,4 +32,4 @@
 
     </script>
 
-</layout-field-image>
+</block-image>
