@@ -28,12 +28,11 @@
                     <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" preview="{opts.preview}"></field-layout-grid>
                 </div>
 
-                <div data-is="block-{ item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ blocks.indexOf('block-'+item.component) > -1 }"></div>
+                <div data-is="block-{ components[item.component].block || item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ blocks.indexOf('block-'+(components[item.component].block || item.component)) > -1 }"></div>
 
-                <div class="uk-grid uk-grid-small uk-grid-match" if="{ blocks.indexOf('block-'+item.component) == -1 }">
+                <div class="uk-grid uk-grid-small uk-grid-match" if="{ isMountProcessFinished && ( blocks.indexOf('block-'+(components[item.component].block || item.component)) == -1 ) }">
 
                     <div class="uk-width-medium-{field.width || '1-1' }" each="{field,idy in (this.components[item.component].fields || []).concat(this.generalSettingsFields)}" if="{ !field.group || field.group == 'Main' || field.group == 'main' }" no-reorder>
-
 
                         <label class="uk-text-small uk-text-bold"><i class="uk-icon-pencil-square uk-margin-small-right"></i> { field.label || field.name }</label>
 
@@ -299,6 +298,12 @@ console.log('leaveComponent');
                 .focusout($this.leaveComponent);
         };
 
+        this.on('update', function() {
+            // avoid "this.refs.input is undefined" in custom components if they use an existing block template
+            // bug seems to be somewhere inside the cp-field component
+            if (this.isMounted) this.isMountProcessFinished = true;
+        });
+
         this.on('mount', function() {
 
             this.showPreview = opts.preview === undefined ? true : opts.preview;
@@ -436,6 +441,8 @@ console.log('open settings modal');
                     }
                 }, 50);
             });
+
+            this.isMounted = true;
 
             this.update();
         });
