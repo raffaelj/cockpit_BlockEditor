@@ -22,10 +22,10 @@
 
     <div ref="input" class="uk-container-center uk-text-center uk-width-large-2-3 uk-width-xlarge-1-2" show="{ mode == 'edit' }">
 
-            <div class="uk-button uk-button-primary uk-button-large button-editable">
-                <input type="text" bind="{ opts.bind }.text" class="button-input" title="{ App.i18n.get('Text') }" />
-            </div>
-            <input type="text" bind="{ opts.bind }.url" class="uk-margin-small-left" title="{ App.i18n.get('Url') }" />
+        <div class="uk-button uk-button-primary uk-button-large button-editable">
+            <input type="text" bind="{ opts.bind }.text" class="button-input" title="{ App.i18n.get('Text') }" />
+        </div>
+        <input type="text" bind="{ opts.bind }.url" class="uk-margin-small-left" title="{ App.i18n.get('Url') }" />
 
     </div>
 
@@ -43,6 +43,8 @@
 
             if (e) e.preventDefault();
 
+            this.root.closest('.layout-component').dataset.active = 1;
+
             this.mode = 'edit';
             this.update();
             this.refs.input.querySelector('input').focus();
@@ -50,6 +52,8 @@
         }
 
         this.show = function() {
+
+            this.root.closest('.layout-component').dataset.active = 0;
 
             if (opts.item.settings.text) {
 

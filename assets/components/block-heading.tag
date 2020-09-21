@@ -28,6 +28,8 @@
 
         this.edit = function() {
 
+            this.root.closest('.layout-component').dataset.active = 1;
+
             this.mode = 'edit';
             this.update();
             this.refs.input.querySelector('input').focus();
@@ -35,6 +37,8 @@
         }
 
         this.show = function() {
+
+            this.root.closest('.layout-component').dataset.active = 0;
 
             if (opts.item.settings.text) {
 

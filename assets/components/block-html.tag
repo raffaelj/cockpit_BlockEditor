@@ -67,6 +67,8 @@
 
         this.edit = function() {
 
+            this.root.closest('.layout-component').dataset.active = 1;
+
             this.mode = 'edit';
             this.update();
 
@@ -80,6 +82,8 @@
         });
 
         this.show = function(e) {
+
+            this.root.closest('.layout-component').dataset.active = 0;
 
             if (this.editor) this.cursor = this.editor.getCursor();
             this.mode = 'show';

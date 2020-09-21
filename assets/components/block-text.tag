@@ -34,7 +34,7 @@
             // enable autoresize
             editor.settings.height = null;
             editor.settings.resize = false;
-            editor.settings.autoresize_on_init = true;
+//             editor.settings.autoresize_on_init = true;
             editor.settings.autoresize_overflow_padding = 0;
             editor.settings.autoresize_bottom_margin = 0;
             editor.settings.autoresize_min_height = 40;
@@ -42,11 +42,26 @@
                 editor.settings.plugins = editor.settings.plugins + ' autoresize';
             }
 
+            // reset top margin
+            editor.settings.content_style += 'body {margin-top:0;} body > *:first-child {margin-top:0;}';
+
         });
 
         this.edit = function() {
+
+            this.root.closest('.layout-component').dataset.active = 1;
             this.mode = 'edit';
             this.update();
+
+            setTimeout(function() {
+                var editorId = $this.refs.input.querySelector('textarea').id,
+                    editor   = tinymce.get(editorId);
+
+                editor.focus();
+                editor.execCommand('mceAutoResize');
+
+            });
+
         }
 
         this.parent.on('component.leave', function() {
@@ -62,6 +77,7 @@
                     && !(document.activeElement.classList.contains('layout-component')
                         && document.activeElement.contains($this.refs.input))
                 ) {
+                    $this.root.closest('.layout-component').dataset.active = 0;
                     $this.mode = 'show';
                     $this.update();
                 }

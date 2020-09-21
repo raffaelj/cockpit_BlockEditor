@@ -17,11 +17,15 @@
         });
 
         this.edit = function() {
+
+            this.root.closest('.layout-component').dataset.active = 1;
             this.mode = 'edit';
             this.update();
         }
 
         this.show = function() {
+
+            this.root.closest('.layout-component').dataset.active = 0;
 
             if (opts.item.settings.image && opts.item.settings.image.path) {
 

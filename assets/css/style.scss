@@ -49,12 +49,37 @@
     border-radius: 2px;
     transition: background .5s ease-in-out;
 /*     z-index: 0; */
-    
+
     .mce-top-part {
         position: absolute;
-        bottom: 100%;
-        background: #fff;
+        bottom: calc(100% - 1px);
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-radius: 4px 4px 0 0;
 /*         margin-bottom: 3em; */
+        &:before {
+            box-shadow: none;
+        }
+    }
+
+    .mce-statusbar {
+        position: absolute;
+/*         top: 100%; */
+        top: calc(100% - 1px);
+        border-left: 1px solid #ddd !important;
+        border-bottom: 1px solid #ddd !important;
+        border-right: 1px solid #ddd !important;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .mce-edit-area {
+        border: 1px solid #ddd !important;
+        border-radius: 0 4px 4px 0;
+        iframe {
+            border-radius: 0 4px 4px 0;
+        }
     }
 }
 
@@ -75,14 +100,6 @@
         border-radius: 50%;
         cursor: move;
         margin-left: -.1em;
-
-/*        + .layout-component-topbar {
-            background-color: rgba(255,255,255,.5);
-            box-shadow: 0 -1px 2px #ccc;
-            > * {
-                visibility: visible;
-            }
-        }*/
     }
 }
 
@@ -109,13 +126,12 @@
     }
 }
 
-.layout-component-active {
+.layout-component-active, .layout-component[data-active="1"] {
     background-color: rgba(255,255,255,.5);
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
     z-index: 1;
 
     &:hover > .field-layout-handle {
-/*     &:hover > div > .field-layout-handle { */
         display: block;
     }
     > div > .layout-component-topbar {
@@ -127,7 +143,15 @@
         }
     }
     .field-layout-handle {
-/*         z-index: 4; */
+        z-index: 4;
+    }
+}
+
+.layout-component[data-active="1"] {
+    z-index: 2;
+    background-color: #fff;
+    > div > .layout-component-topbar {
+        background-color: rgba(255,255,255,1);
     }
 }
 
