@@ -22,7 +22,7 @@
             }
         });
 
-        this.parent.on('leavecomponent', function() {
+        this.parent.on('component.leave', function() {
             $this.show();
         });
 

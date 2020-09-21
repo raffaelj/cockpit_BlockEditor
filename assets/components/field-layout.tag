@@ -260,7 +260,7 @@
 
         this.focusComponent = function(e) {
             $this.emphasizeComponent(e);
-            $this.trigger('focuscomponent', e);
+            $this.trigger('component.focus', e);
         };
 
         this.leaveComponent = function(e) {
@@ -286,7 +286,7 @@ console.log('leaveComponent');
 
             $this.deemphasizeComponent(e);
 
-            $this.trigger('leavecomponent', e);
+            $this.trigger('component.leave', e);
         };
 
         this.addActiveStateEvents = function() {
@@ -392,7 +392,7 @@ console.log('change', mode);
                             $this.$setValue(items);
                             $this.update();
 
-                            $this.trigger('componentmoved');
+                            $this.trigger('component.moved');
 
                             break;
 

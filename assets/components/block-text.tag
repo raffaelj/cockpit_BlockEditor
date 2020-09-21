@@ -55,7 +55,7 @@
             this.update();
         }
 
-        this.parent.on('leavecomponent', function() {
+        this.parent.on('component.leave', function() {
             $this.show();
         });
 
@@ -75,7 +75,7 @@
 
         }
 
-        this.parent.on('componentmoved', function() {
+        this.parent.on('component.moved', function() {
 
             // destroy and recreate wysiwyg editor when component moved
             var editorId = $this.refs.input.querySelector('textarea').id,

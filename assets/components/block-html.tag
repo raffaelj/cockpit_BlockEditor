@@ -75,7 +75,7 @@
 
         }
 
-        this.parent.on('leavecomponent', function() {
+        this.parent.on('component.leave', function() {
             $this.show();
         });
 
@@ -86,7 +86,7 @@
             this.update();
         }
 
-        this.parent.on('componentmoved', function() {
+        this.parent.on('component.moved', function() {
 
             // avoid weird cursor reset after first char input in moved codemirror
             // if bind changes, $updateValue of field-html has a force option --> avoid that and avoid setting
