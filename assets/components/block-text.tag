@@ -15,7 +15,6 @@
 
         this.editorOptions = {};
 
-
         opts.options.fields.forEach(function(field) {
 
             if (field.type == 'wysiwyg' && field.options && field.options.editor) {
@@ -25,16 +24,11 @@
             }
         });
 
-        this.on('update', function() {
-// console.log('layout-field-text update', opts.bind);
-        });
-
-        // https://www.tiny.cloud/docs-4x/advanced/events/#blur
         App.$(document).on('init-wysiwyg-editor', function(e, editor) {
-            editor.on('blur', function (e) {
-// console.log('editor blur', e);
-                $this.show(e);
-//                 $this.parent.trigger('leavecomponent');
+
+            // https://www.tiny.cloud/docs-4x/advanced/events/#blur
+            editor.on('blur', function() {
+                $this.show();
             });
 
             // enable autoresize
@@ -47,7 +41,7 @@
             if (!editor.settings.plugins.match(/autoresize/)) {
                 editor.settings.plugins = editor.settings.plugins + ' autoresize';
             }
-// console.log(editor.settings);
+
         });
 
         this.edit = function() {
@@ -59,7 +53,7 @@
             $this.show();
         });
 
-        this.show = function(e) {
+        this.show = function() {
 
             // wait a moment until activeElement is available again
             setTimeout(function() {
@@ -78,9 +72,8 @@
         this.parent.on('component.moved', function() {
 
             // destroy and recreate wysiwyg editor when component moved
-            var editorId = $this.refs.input.querySelector('textarea').id,
-                editor   = tinymce.get(editorId),
-                editorSettings = editor.settings;
+            var editorId       = $this.refs.input.querySelector('textarea').id,
+                editorSettings = tinymce.get(editorId).settings;
 
             tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
             new tinymce.Editor(editorId, editorSettings, tinymce.EditorManager).render();
