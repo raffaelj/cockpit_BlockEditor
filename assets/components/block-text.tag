@@ -11,7 +11,6 @@
         var $this = this;
 
         this.mode = opts.item.settings.text ? 'show' : 'edit';
-        this.wasMoved = false;
 
         this.editorOptions = {};
 
