@@ -107,7 +107,7 @@ options:
 [1]: https://github.com/agentejo/cockpit
 [2]: https://github.com/agentejo/LayoutComponents
 [3]: https://github.com/pauloamgomes/Cockpit-CustomComponents
-[4]: https://discourse.getcockpit.com/
+[4]: https://discourse.getcockpit.com/t/new-addon-blockeditor-layout-field-with-visual-block-editor-draft-experimental/1639
 [5]: https://wordpress.org/gutenberg/
 [6]: https://github.com/pauloamgomes/CockpitCms-EditorFormats
 [7]: https://github.com/agentejo/cockpit/commit/d440ae7b5344d5eb24987f2391a84529224528c2
