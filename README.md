@@ -54,7 +54,7 @@ Before (grey, solid 1px line):
 </block-divider>
 ```
 
-After (dashed 2px line with scissors on the lfet side):
+After (dashed 2px line with scissors on the left side):
 
 ```html
 <block-divider class="uk-flex">
@@ -80,6 +80,7 @@ You have to define your custom components in the field options instead with the 
 In the following example I also used the EditorFormats addon to define a wysiwyg field with minimal editing options.
 
 field type: `layout`
+
 options:
 
 ```json
