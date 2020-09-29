@@ -9,7 +9,7 @@
                 <div class="uk-flex uk-flex-middle layout-component-topbar">
 
                     <div class="uk-flex-item-1 ">
-                        <img class="uk-margin-small-right" riot-src="{ parent.components[item.component].icon ? parent.components[item.component].icon : App.base('/assets/app/media/icons/component.svg')}" width="16">
+                        <img class="uk-margin-small-right" riot-src="{ parent.components[item.component].icon ? App.base('/assets/app/media/icons/' + parent.components[item.component].icon) : App.base('/assets/app/media/icons/component.svg')}" width="16">
                         <span class="uk-text-muted uk-text-uppercase uk-text-small uk-text-bold">{ item.name || parent.components[item.component].label || App.Utils.ucfirst(item.component) }</span>
                     </div>
                     <div class="">
@@ -85,7 +85,7 @@
             <div class="uk-grid uk-grid-match uk-grid-small uk-grid-width-medium-1-4">
                  <div class="uk-grid-margin" each="{component,name in components}" show="{ isComponentAvailable(name) }">
                     <div class="uk-panel uk-panel-framed uk-text-center">
-                        <img riot-src="{ component.icon || App.base('/assets/app/media/icons/component.svg')}" width="30">
+                        <img riot-src="{ component.icon ? App.base('/assets/app/media/icons/' + component.icon) : App.base('/assets/app/media/icons/component.svg')}" width="30">
                         <p class="uk-text-small">{ component.label || App.Utils.ucfirst(name) }</p>
                         <a class="uk-position-cover" onclick="{ add }"></a>
                     </div>
@@ -106,7 +106,7 @@
             <div class="uk-margin-large-bottom">
                 <div class="uk-grid uk-grid-small">
                     <div>
-                        <img riot-src="{ components[settingsComponent.component].icon ? components[settingsComponent.component].icon : App.base('/assets/app/media/icons/settings.svg')}" width="30">
+                        <img riot-src="{ components[settingsComponent.component].icon ? App.base('/assets/app/media/icons/' + components[settingsComponent.component].icon) : App.base('/assets/app/media/icons/settings.svg')}" width="30">
                     </div>
                     <div class="uk-flex-item-1">
                         <h3 class="uk-margin-remove">{ components[settingsComponent.component].label || App.Utils.ucfirst(settingsComponent.component) }</h3>
@@ -180,7 +180,7 @@
 
             "text": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/text.svg'),
+                "icon": "text.svg",
                 "dialog": "large",
                 "fields": [
                     {"name": "text", "type": "wysiwyg", "default": ""}
@@ -189,7 +189,7 @@
 
             "html": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/code.svg'),
+                "icon": "code.svg",
                 "dialog": "large",
                 "fields": [
                     {"name": "html", "type": "html", "default": ""}
@@ -198,7 +198,7 @@
 
             "heading": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/heading.svg'),
+                "icon": "heading.svg",
                 "fields": [
                     {"name": "text", "type": "text", "default": "Header"},
                     {"name": "tag", "type": "select", "options":{"options":['h1','h2','h3','h4','h5','h6']}, "default": "h1"}
@@ -207,7 +207,7 @@
 
             "image": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/photo.svg'),
+                "icon": "photo.svg",
                 "fields": [
                     {"name": "image", "type": "image", "default": {}},
                     {"name": "width", "type": "text", "default": ""},
@@ -218,7 +218,7 @@
 
             "gallery": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/gallery.svg'),
+                "icon": "gallery.svg",
                 "fields": [
                     {"name": "gallery", "type": "gallery", "default": []}
                 ]
@@ -226,12 +226,12 @@
 
             "divider": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/divider.svg'),
+                "icon": "divider.svg",
             },
 
             "button": {
                 "group": "Core",
-                "icon": App.base('/assets/app/media/icons/button.svg'),
+                "icon": "button.svg",
                 "fields": [
                     {"name": "text", "type": "text", "default": ""},
                     {"name": "url", "type": "text", "default": ""}
