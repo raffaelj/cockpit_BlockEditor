@@ -2,6 +2,16 @@
 
 $this->on('admin.init', function() {
 
+    // Override settings page from LayoutComponents addon
+    if (isset($this['modules']['layoutcomponents'])) {
+        $this->bind('/layout-components', function() {
+            return $this->invoke('BlockEditor\\Controller\\Admin', 'index');
+        });
+        $this->bind('/layout-components/index', function() {
+            return $this->invoke('BlockEditor\\Controller\\Admin', 'index');
+        });
+    }
+
     $this->helper('admin')->addAssets([
         'blockeditor:assets/css/style.min.css',
 
