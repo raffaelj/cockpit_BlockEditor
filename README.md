@@ -73,9 +73,11 @@ After (dashed 2px line with scissors on the left side):
 
 ## Use existing block templates with a custom component
 
-This doesn't work with the LayoutComponents addon, because it doesn't provide the option to create custom block options.
+<del>This doesn't work with the LayoutComponents addon, because it doesn't provide the option to create custom block options.</del>
 
-You have to define your custom components in the field options instead with the key `"block": "text"`. Now the component will use the text block template.
+I wrote an improved settings page for the LayoutComponents addon in which you can set the `block` key.
+
+You can define your custom components in the field options instead with the key `"block": "text"`. Now the component will use the text block template.
 
 In the following example I also used the EditorFormats addon to define a wysiwyg field with minimal editing options.
 
