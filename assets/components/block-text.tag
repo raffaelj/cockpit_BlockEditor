@@ -72,6 +72,7 @@
             // wait a moment until activeElement is available again
             setTimeout(function() {
                 if (opts.item.settings.text
+                    && $this.refs.input
                     && !$this.refs.input.contains(document.activeElement)
                     && !(document.activeElement.classList.contains('layout-component')
                         && document.activeElement.contains($this.refs.input))
