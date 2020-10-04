@@ -23,6 +23,10 @@
             }
         });
 
+        this.on('mount', function() {
+            this.root.closest('.layout-component').classList.add('contains-editor');
+        });
+
         App.$(document).on('init-wysiwyg-editor', function(e, editor) {
 
             // https://www.tiny.cloud/docs-4x/advanced/events/#blur
@@ -42,7 +46,7 @@
             }
 
             // reset top margin
-            editor.settings.content_style += 'body {margin-top:0;} body > *:first-child {margin-top:0;}';
+            editor.settings.content_style += 'body {margin:10px;} body > *:first-child {margin-top:0;}';
 
         });
 

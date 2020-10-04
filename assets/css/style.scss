@@ -42,13 +42,17 @@
 
 // advanced
 
+field-layout, [data-is=field-layout] {
+    .layout-components > div.layout-component {
+        margin: 0 0 .5em;
+    }
+}
 
 .layout-component {
     position: relative;
-    padding: 1em .5em .5em;
+    padding: 1em 10px 10px;
     border-radius: 2px;
     transition: background .5s ease-in-out;
-/*     z-index: 0; */
 
     block-text, div[data-is=block-text] {
         .mce-top-part {
@@ -59,7 +63,6 @@
             border-left: 1px solid #ddd;
             border-right: 1px solid #ddd;
             border-radius: 4px 4px 0 0;
-    /*         margin-bottom: 3em; */
             &:before {
                 box-shadow: none;
             }
@@ -67,7 +70,6 @@
 
         .mce-statusbar {
             position: absolute;
-    /*         top: 100%; */
             top: calc(100% - 1px);
             border-left: 1px solid #ddd !important;
             border-bottom: 1px solid #ddd !important;
@@ -83,6 +85,20 @@
             }
         }
     }
+    &[data-active="1"] {
+        block-text, div[data-is=block-text] {
+            margin-top: -10px;
+        }
+    }
+    &.contains-editor {
+        &[data-active="1"] {
+            padding-left: 0;
+            padding-right: 0;
+            block-text, div[data-is=block-text] {
+                margin-top: -10px;
+            }
+        }
+    }
 }
 
 .field-layout-handle {
@@ -90,7 +106,6 @@
     top: -.7em;
     left: 50%;
     display: none;
-/*     z-index: 2; */
     padding: .2em;
     color: #dfdfdf;
 
@@ -112,7 +127,6 @@
     right: 0;
     padding: .2em .4em;
     margin-top: -1.8em;
-/*     z-index: 1; */
 
     > * {
         visibility: hidden;
@@ -137,7 +151,6 @@
         display: block;
     }
     > div > .layout-component-topbar {
-/*         z-index: 3; */
         background-color: rgba(255,255,255,.5);
         box-shadow: 0 -1px 2px #ccc;
         > * {
@@ -159,8 +172,7 @@
 
 
 /* for debugging */
-/*        .layout-component {
-    background-color: rgba(0,255,255,.5);
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
-}*/
-
+//.layout-component {
+    //background-color: rgba(0,255,255,.5);
+    //box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+//}
