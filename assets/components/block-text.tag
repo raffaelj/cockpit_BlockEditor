@@ -89,17 +89,6 @@
 
         }
 
-        this.parent.on('component.moved', function() {
-
-            // destroy and recreate wysiwyg editor when component moved
-            var editorId       = $this.refs.input.querySelector('textarea').id,
-                editorSettings = tinymce.get(editorId).settings;
-
-            tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
-            new tinymce.Editor(editorId, editorSettings, tinymce.EditorManager).render();
-
-        });
-
     </script>
 
 </block-text>

@@ -31,7 +31,7 @@
 
                 <div data-is="block-{ components[item.component].block || item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ blocks.indexOf('block-'+(components[item.component].block || item.component)) > -1 }"></div>
 
-                <div class="uk-grid uk-grid-small uk-grid-match" if="{ isMountProcessFinished && ( blocks.indexOf('block-'+(components[item.component].block || item.component)) == -1 ) }">
+                <div data-no-block class="uk-grid uk-grid-small uk-grid-match" if="{ isMountProcessFinished && ( blocks.indexOf('block-'+(components[item.component].block || item.component)) == -1 ) }">
 
                     <div class="uk-width-medium-{field.width || '1-1' }" each="{field,idy in (this.components[item.component].fields || []).concat(this.generalSettingsFields)}" if="{ !field.group || field.group == 'Main' || field.group == 'main' }" no-reorder>
 
@@ -344,30 +344,12 @@ console.log('start', el);
                 window.___moved_layout_item = {idx: el._tag.idx, item: el._tag.item, src: $this};
 
                 $this.isSorting = true;
-                
+
                 $this.trigger('component.move.before', el);
 
             }).on('stop.uk.sortable', function(e, sortable, el, placeholder) {
 console.log('stop');
                 $this.isSorting = false;
-
-                // destroy and recreate wysiwyg editors --> moved to layout-field-text.tag
-//                 tinymce.EditorManager.editors.forEach(function(editor) {
-// 
-//                     var editorId    = editor.id,
-//                         oldSettings = editor.settings,
-//                         editorEl    = document.getElementById(editorId);
-// 
-//                     if (editorEl && $this.refs.components.contains(editorEl)) {
-// // console.log(editorId);
-//                         tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
-//                         new tinymce.Editor(editorId, oldSettings, tinymce.EditorManager).render();
-// 
-//                     }
-// 
-//                 });
-// 
-//                 $this.update();
 
             });
 
@@ -393,8 +375,6 @@ console.log('change', mode);
                             $this.$setValue(items);
                             $this.update();
 
-                            $this.trigger('component.moved');
-
                             break;
 
                         case 'removed':
@@ -414,6 +394,7 @@ console.log('change', mode);
                             }
                             break;
                     }
+                    $this.trigger('component.'+mode);
                 }
             });
 
@@ -675,6 +656,40 @@ console.log('open settings modal');
 
             return src;
         }
+
+        rebuildEditors() {
+
+            var editorElements = $this.refs.components.find('field-wysiwyg textarea, [data-is=field-wysiwyg] textarea');
+
+            editorElements.forEach(function(el) {
+                var editorId = el.id;
+                $this.rebuildEditor(editorId);
+            });
+        }
+
+        rebuildEditor(editorId) {
+
+            var editor = tinymce.get(editorId);
+            if (!editor) {
+                setTimeout(function() {
+                    $this.rebuildEditor(editorId);
+                }, 50);
+                return;
+            }
+
+            var editorSettings = editor.settings;
+                tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
+                new tinymce.Editor(editorId, editorSettings, tinymce.EditorManager).render();
+        }
+
+        this.on('component.moved', function() {
+            $this.rebuildEditors();
+        });
+        this.on('component.added', function() {
+            setTimeout(function() {
+                $this.rebuildEditors();
+            });
+        });
 
     </script>
 
