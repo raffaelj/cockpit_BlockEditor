@@ -389,6 +389,8 @@ console.log('change', mode);
                             $this.$setValue($this.items);
                             el.remove();
 
+                            $this.addActiveStateEvents();
+
                             if (opts.child) {
                                 $this.propagateUpdate();
                             }
