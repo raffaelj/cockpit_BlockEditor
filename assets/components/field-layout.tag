@@ -4,20 +4,21 @@
 
         <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}">
 
-            <i class="field-layout-handle uk-icon-arrows" title="{ App.i18n.get('Drag Component') }"></i>
             <div if="{ typeof components[item.component] != 'undefined' }">
-                <div class="uk-flex uk-flex-middle layout-component-topbar">
 
-                    <div class="uk-flex-item-1 ">
-                        <img class="uk-margin-small-right" riot-src="{ parent.components[item.component].icon ? App.base('/assets/app/media/icons/' + parent.components[item.component].icon) : App.base('/assets/app/media/icons/component.svg')}" width="16">
+                <div class="layout-component-menubar">
+
+                    <div class="layout-component-menubar-left">
+                        <i class="field-layout-handle uk-icon-arrows uk-icon-hover" title="{ App.i18n.get('Drag Component') }" data-uk-tooltip></i>
+                        <a onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }" data-uk-tooltip><i class="uk-icon-gear uk-icon-hover"></i></a>
+                        <a class="" onclick="{ parent.cloneComponent }" title="{ App.i18n.get('Clone Component') }" data-uk-tooltip><i class="uk-icon-clone uk-icon-hover"></i></a>
+                        <a class="" onclick="{ parent.addComponent }" title="{ App.i18n.get('Add Component') }" data-uk-tooltip><i class="uk-icon-plus uk-icon-hover"></i></a>
+                        <a class="uk-text-danger" onclick="{ parent.remove }" title="{ App.i18n.get('Remove Component') }" data-uk-tooltip><i class="uk-icon-trash-o uk-icon-hover"></i></a>
+                    </div><div class="layout-component-menubar-top">
+                        <img class="" riot-src="{ parent.components[item.component].icon ? App.base('/assets/app/media/icons/' + parent.components[item.component].icon) : App.base('/assets/app/media/icons/component.svg')}" width="16">
                         <span class="uk-text-muted uk-text-uppercase uk-text-small uk-text-bold">{ item.name || parent.components[item.component].label || App.Utils.ucfirst(item.component) }</span>
                     </div>
-                    <div class="">
-                        <a onclick="{ parent.settings }" title="{ App.i18n.get('Settings') }"><i class="uk-icon-gear"></i></a>
-                        <a class="uk-margin-small-left" onclick="{ parent.cloneComponent }" title="{ App.i18n.get('Clone Component') }"><i class="uk-icon-clone"></i></a>
-                        <a class="uk-margin-small-left" onclick="{ parent.addComponent }" title="{ App.i18n.get('Add Component') }"><i class="uk-icon-plus"></i></a>
-                        <a class="uk-margin-small-left uk-text-danger" onclick="{ parent.remove }"><i class="uk-icon-trash-o"></i></a>
-                    </div>
+
                 </div>
 
                 <div class="" if="{parent.components[item.component].children}">

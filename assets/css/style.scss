@@ -101,45 +101,32 @@ field-layout, [data-is=field-layout] {
     }
 }
 
-.field-layout-handle {
-    position: absolute;
-    top: -.7em;
-    left: 50%;
+.layout-component-menubar {
+    //opacity: 0;
     display: none;
-    padding: .2em;
-    color: #dfdfdf;
 
-    &:hover {
-        font-size: 1.2em;
-        background-color: #fff;
-        color: #222;
-        border: 1px solid #ccc;
-        border-radius: 50%;
-        cursor: move;
-        margin-left: -.1em;
-    }
-}
-
-.layout-component-topbar {
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    padding: .2em .4em;
-    margin-top: -1.8em;
+    left: -1.8em;
+    padding: .2em;
+    margin-top: -1.7em;
+    margin-right: .1em;
+    z-index: -1;
 
-    > * {
-        visibility: hidden;
+    .layout-component-menubar-left, .layout-component-menubar-top {
+        display: inline-block;
+        vertical-align: top;
     }
 
-    &:hover {
-        background-color: rgba(255,255,255,.95);
-        box-shadow: 0 -1px 2px #ccc;
-
-        > *{
-            visibility: visible;
-        }
+    .layout-component-menubar-left {
+        width: 1.5em;
+        text-align: center;
     }
+
+    .layout-component-menubar-top {
+        padding: 0 .2em;
+    }
+
 }
 
 .layout-component-active, .layout-component[data-active="1"] {
@@ -147,19 +134,16 @@ field-layout, [data-is=field-layout] {
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
     z-index: 1;
 
-    &:hover > .field-layout-handle {
+    > div > .layout-component-menubar {
+        //opacity: 1;
         display: block;
-    }
-    > div > .layout-component-topbar {
-        background-color: rgba(255,255,255,.5);
-        box-shadow: 0 -1px 2px #ccc;
-        > * {
-            visibility: visible;
+
+        .layout-component-menubar-left, .layout-component-menubar-top {
+            background-color: rgba(255,255,255,1);
+            z-index: 2;
         }
     }
-    .field-layout-handle {
-        z-index: 4;
-    }
+
 }
 
 .layout-component[data-active="1"] {
@@ -170,6 +154,9 @@ field-layout, [data-is=field-layout] {
     }
 }
 
+.field-layout-handle {
+    cursor: move;
+}
 
 /* for debugging */
 //.layout-component {
