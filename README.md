@@ -116,7 +116,7 @@ I used the following codes as a base and changed a lot of the code inside them:
 
 * [layout field][9] from Cockit CMS, author: Artur Heinze, MIT licensed
 * [layout-grid field][9] from Cockit CMS, author: Artur Heinze, MIT licensed
-* settings page from [LayoutComponents addon][2], author: Artur Heinze, unkown license (I guess MIT ???)
+* settings page from [LayoutComponents addon][2], author: Artur Heinze, MIT licensed
 
 
 
