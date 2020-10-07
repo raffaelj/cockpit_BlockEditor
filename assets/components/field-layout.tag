@@ -2,9 +2,9 @@
 
     <div class="uk-sortable layout-components {!items.length && 'empty'}" ref="components" data-uk-sortable="animation:250, group:'field-layout-items', handleClass:'field-layout-handle'">
 
-        <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}" data-block="{ components[item.component].block || item.component }">
+        <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}" data-block="{ components[item.component] ? components[item.component].block : item.component }">
 
-            <div if="{ typeof components[item.component] != 'undefined' }">
+            <div if="{ components[item.component] }">
 
                 <div class="layout-component-menubar">
 
@@ -48,7 +48,7 @@
                 </div>
 
             </div>
-            <div if="{ typeof components[item.component] == 'undefined' }">
+            <div if="{ !components[item.component] }">
                 <div class="uk-flex uk-flex-middle layout-component-topbar">
 
                     <div class="uk-flex-item-1 ">
