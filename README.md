@@ -16,7 +16,8 @@ It should be compatible with these addons:
 
 It shares nearly the same data structure with the core layout field. So if you don't like the block editor, just remove this addon and continue working with the core field.
 
-**The current development state is a draft and you will see some `console.log()` output in your browser console.**
+**The current development state is a draft and you <del>will</del> might see some `console.log()` output in your browser console.**
+To see all debug output, set `{"debug":true"}` in the field options of your layout field.
 
 Please report bugs and send feedback in the [issues section][8] or in the [Cockpit community forum][4].
 
