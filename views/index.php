@@ -1,4 +1,4 @@
-{{-- copy/paste from LayoutComponents addon with multiple improvements --}}
+{{-- copy/paste from LayoutComponents addon with multiple improvements https://github.com/agentejo/LayoutComponents --}}
 
 <div>
     <ul class="uk-breadcrumb">

@@ -1,6 +1,6 @@
 <?php
 
-// copy/paste from LayoutComponents addon
+// copy/paste from LayoutComponents addon https://github.com/agentejo/LayoutComponents
 
 namespace BlockEditor\Controller;
 

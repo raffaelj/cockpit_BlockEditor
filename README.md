@@ -11,14 +11,14 @@ So, with the [Gutenberg][5] block editor from WordPress in mind, I started to re
 It should be compatible with these addons:
 
 * [LayoutComponents][2]
-* [CustomComponents][3] (obsolete since version 0.11.0 - [commit][7])
+* [CustomComponents][3] (obsolete since Cockpit version 0.11.0 - [commit][7])
 * [EditorFormats][6]
 
 It shares nearly the same data structure with the core layout field. So if you don't like the block editor, just remove this addon and continue working with the core field.
 
-The current development state is a draft and you will see some `console.log()` output in your browser console.
+**The current development state is a draft and you will see some `console.log()` output in your browser console.**
 
-Please report bugs and send feedback in the issues section or in the [Cockpit community forum][4].
+Please report bugs and send feedback in the [issues section][8] or in the [Cockpit community forum][4].
 
 ## Installation
 
@@ -107,6 +107,18 @@ options:
 }
 ```
 
+## License, credits and third party resources
+
+License: MIT, author: Raffael Jesche
+
+I used the following codes as a base and changed a lot of the code inside them:
+
+* [layout field][9] from Cockit CMS, author: Artur Heinze, MIT licensed
+* [layout-grid field][9] from Cockit CMS, author: Artur Heinze, MIT licensed
+* settings page from [LayoutComponents addon][2], author: Artur Heinze, unkown license (I guess MIT ???)
+
+
+
 [1]: https://github.com/agentejo/cockpit
 [2]: https://github.com/agentejo/LayoutComponents
 [3]: https://github.com/pauloamgomes/Cockpit-CustomComponents
@@ -114,3 +126,5 @@ options:
 [5]: https://wordpress.org/gutenberg/
 [6]: https://github.com/pauloamgomes/CockpitCms-EditorFormats
 [7]: https://github.com/agentejo/cockpit/commit/d440ae7b5344d5eb24987f2391a84529224528c2
+[8]: https://github.com/raffaelj/cockpit_BlockEditor/issues
+[9]: https://github.com/agentejo/cockpit/blob/next/modules/Cockpit/assets/components/field-layout.tag
