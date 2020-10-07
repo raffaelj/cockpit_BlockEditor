@@ -2,7 +2,7 @@
 
     <div class="uk-sortable layout-components {!items.length && 'empty'}" ref="components" data-uk-sortable="animation:250, group:'field-layout-items', handleClass:'field-layout-handle'">
 
-        <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}">
+        <div class="layout-component" tabindex="0" each="{ item,idx in items }" data-idx="{idx}" data-block="{ components[item.component].block || item.component }">
 
             <div if="{ typeof components[item.component] != 'undefined' }">
 
@@ -266,17 +266,17 @@
 
         this.leaveComponent = function(e) {
 
-console.log('leaveComponent');
-// console.log('leaveComponent', e);
-// console.log('currentTarget', e.currentTarget);
-// console.log('relatedTarget', e.relatedTarget);
+            e.stopPropagation();
+
+console.log('leaveComponent', e.currentTarget.dataset.block);
+
 
             if (e.relatedTarget && e.relatedTarget.closest('.uk-modal')) {
                 console.log('left focus to any modal');
                 return;
             }
 
-            if (e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) {
+            if (e.relatedTarget && e.currentTarget.contains(e.relatedTarget) && !isWrapperComponent(e.relatedTarget)) {
                 console.log('left focus to inner element');
                 return;
             }
@@ -287,7 +287,15 @@ console.log('leaveComponent');
 
             $this.deemphasizeComponent(e);
 
-            $this.trigger('component.leave', e);
+            var block = e.currentTarget.querySelector('[data-is=block-'+e.currentTarget.dataset.block+']');
+// console.log('block:', block);
+            if (block && block._tag) {
+                block._tag.trigger('component.leave', e);
+            }
+            else {
+// console.log('no block');
+            }
+
         };
 
         this.addActiveStateEvents = function() {
@@ -692,6 +700,13 @@ console.log('open settings modal');
                 $this.rebuildEditors();
             });
         });
+        
+        function isComponent(el) {
+            return el.classList.contains('layout-component') && el.id;
+        }
+        function isWrapperComponent(el) {
+            return el.dataset.block && (($this.components[el.dataset.block] && $this.components[el.dataset.block].children) || el.dataset.block == 'grid' );
+        }
 
     </script>
 

@@ -6,7 +6,7 @@
 
     <div class="uk-sortable uk-grid uk-grid-match uk-grid-small uk-grid-width-medium-1-{columns.length > 5 ? 1 : columns.length}" show="{columns.length}" ref="columns" data-uk-sortable="animation:false, handleClass:'field-layout-handle'">
         <div class="uk-grid-margin " each="{column,idx in columns}">
-            <div class="layout-component" tabindex="0">
+            <div class="layout-component" tabindex="0" data-block="grid-column-{ idx }">
                 <div>
 
                     <div class="layout-component-menubar">

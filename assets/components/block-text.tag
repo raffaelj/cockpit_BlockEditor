@@ -67,7 +67,7 @@
 
         }
 
-        this.parent.on('component.leave', function() {
+        this.on('component.leave', function() {
             $this.show();
         });
 
@@ -75,13 +75,15 @@
 
             // wait a moment until activeElement is available again
             setTimeout(function() {
+
+                var component = $this.root.closest('.layout-component');
+
                 if (opts.item.settings.text
                     && $this.refs.input
                     && !$this.refs.input.contains(document.activeElement)
-                    && !(document.activeElement.classList.contains('layout-component')
-                        && document.activeElement.contains($this.refs.input))
+                    && (document.activeElement != component)
                 ) {
-                    $this.root.closest('.layout-component').dataset.active = 0;
+                    component.dataset.active = 0;
                     $this.mode = 'show';
                     $this.update();
                 }

@@ -12,7 +12,7 @@
 
         this.mode = opts.item.settings.image && opts.item.settings.image.path ? 'show' : 'edit';
 
-        this.parent.on('component.leave', function() {
+        this.on('component.leave', function() {
             $this.show();
         });
 

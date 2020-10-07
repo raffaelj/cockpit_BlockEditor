@@ -35,7 +35,7 @@
 
         this.mode = opts.item.settings.text ? 'show' : 'edit';
 
-        this.parent.on('component.leave', function() {
+        this.on('component.leave', function() {
             $this.show();
         });
 
