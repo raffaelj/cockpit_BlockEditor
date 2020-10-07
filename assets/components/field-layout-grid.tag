@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="">
-                        <field-layout bind="columns[{idx}].children" child="true" components="{ opts.components }" exclude="{ opts.exclude }" preview="{opts.preview}"></field-layout>
+                        <field-layout bind="columns[{idx}].children" child="true" components="{ opts.components }" exclude="{ opts.exclude }"></field-layout>
                     </div>
                 </div>
             </div>
