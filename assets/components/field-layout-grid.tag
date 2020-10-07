@@ -109,6 +109,8 @@
                     $this.update();
 
                     $this.propagateUpdate();
+console.log('grid - trigger: component.'+mode);
+                    $this.parent.trigger('component.'+mode);
                 }
             });
 

@@ -404,6 +404,7 @@ console.log('change', mode);
                             }
                             break;
                     }
+console.log('trigger: component.'+mode);
                     $this.trigger('component.'+mode);
                 }
             });
@@ -686,7 +687,7 @@ console.log('open settings modal');
                 }, 50);
                 return;
             }
-
+console.log('rebuild editor', editorId);
             var editorSettings = editor.settings;
                 tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
                 new tinymce.Editor(editorId, editorSettings, tinymce.EditorManager).render();
@@ -700,7 +701,12 @@ console.log('open settings modal');
                 $this.rebuildEditors();
             });
         });
-        
+        this.on('component.removed', function() {
+            setTimeout(function() {
+                $this.rebuildEditors();
+            });
+        });
+
         function isComponent(el) {
             return el.classList.contains('layout-component') && el.id;
         }
