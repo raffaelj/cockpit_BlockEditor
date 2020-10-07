@@ -22,11 +22,11 @@
                 </div>
 
                 <div class="" if="{parent.components[item.component].children}">
-                    <field-layout bind="items[{idx}].children" child="true" parent-component="{parent.components[item.component]}" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }"></field-layout>
+                    <field-layout bind="items[{idx}].children" child="true" parent-component="{parent.components[item.component]}" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" debug="{ opts.debug }"></field-layout>
                 </div>
 
                 <div class="" if="{item.component == 'grid'}">
-                    <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }"></field-layout-grid>
+                    <field-layout-grid bind="items[{idx}].columns" components="{ parent.components }" exclude="{ opts.exclude }" restrict="{ opts.restrict }" debug="{ opts.debug }"></field-layout-grid>
                 </div>
 
                 <div data-is="block-{ components[item.component].block || item.component }" bind="items[{idx}].settings" item="{ item }" options="{ components[item.component] }" if="{ blocks.indexOf('block-'+(components[item.component].block || item.component)) > -1 }"></div>
@@ -268,7 +268,7 @@
 
             e.stopPropagation();
 
-console.log('leaveComponent', e.currentTarget.dataset.block);
+if (opts.debug) console.log('leaveComponent', e.currentTarget.dataset.block);
 
 
             if (e.relatedTarget && e.relatedTarget.closest('.uk-modal')) {
@@ -277,23 +277,23 @@ console.log('leaveComponent', e.currentTarget.dataset.block);
             }
 
             if (e.relatedTarget && e.currentTarget.contains(e.relatedTarget) && !isWrapperComponent(e.relatedTarget)) {
-                console.log('left focus to inner element');
+                if (opts.debug) console.log('left focus to inner element');
                 return;
             }
 
             if ($this.refs.modalSettings.contains(e.relatedTarget)) {
-                console.log('left focus to settings modal');
+                if (opts.debug) console.log('left focus to settings modal');
             }
 
             $this.deemphasizeComponent(e);
 
             var block = e.currentTarget.querySelector('[data-is=block-'+e.currentTarget.dataset.block+']');
-// console.log('block:', block);
+// if (opts.debug) console.log('block:', block);
             if (block && block._tag) {
                 block._tag.trigger('component.leave', e);
             }
             else {
-// console.log('no block');
+// if (opts.debug) console.log('no block');
             }
 
         };
@@ -344,7 +344,7 @@ console.log('leaveComponent', e.currentTarget.dataset.block);
 
 //             var editors = {};
             App.$(this.refs.components).on('start.uk.sortable', function(e, sortable, el, placeholder) {
-console.log('start', el);
+if (opts.debug) console.log('start', el);
                 if (!el) return;
                 e.stopPropagation();
                 window.___moved_layout_item = {idx: el._tag.idx, item: el._tag.item, src: $this};
@@ -354,13 +354,13 @@ console.log('start', el);
                 $this.trigger('component.move.before', el);
 
             }).on('stop.uk.sortable', function(e, sortable, el, placeholder) {
-console.log('stop');
+if (opts.debug) console.log('stop');
                 $this.isSorting = false;
 
             });
 
             App.$(this.refs.components).on('change.uk.sortable', function(e, sortable, el, mode) {
-console.log('change', mode);
+if (opts.debug) console.log('change', mode);
                 if (!el) return;
 
                 e.stopPropagation();
@@ -402,14 +402,14 @@ console.log('change', mode);
                             }
                             break;
                     }
-console.log('trigger: component.'+mode);
+if (opts.debug) console.log('trigger: component.'+mode);
                     $this.trigger('component.'+mode);
                 }
             });
 
             UIkit.modal(this.refs.modalSettings, {modal:false}).on('show.uk.modal', function(e) {
 
-console.log('open settings modal');
+if (opts.debug) console.log('open settings modal');
 //                 $this.isModalOpen = true;
 //                 $this.update();
 
@@ -616,7 +616,7 @@ console.log('open settings modal');
                 }, 50);
                 return;
             }
-console.log('rebuild editor', editorId);
+if (opts.debug) console.log('rebuild editor', editorId);
             var editorSettings = editor.settings;
                 tinymce.EditorManager.execCommand('mceRemoveEditor', false, editorId);
                 new tinymce.Editor(editorId, editorSettings, tinymce.EditorManager).render();

@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="">
-                        <field-layout bind="columns[{idx}].children" child="true" components="{ opts.components }" exclude="{ opts.exclude }"></field-layout>
+                        <field-layout bind="columns[{idx}].children" child="true" components="{ opts.components }" exclude="{ opts.exclude }" debug="{ opts.debug }"></field-layout>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     $this.update();
 
                     $this.propagateUpdate();
-console.log('grid - trigger: component.'+mode);
+if (opts.debug) console.log('grid - trigger: component.'+mode);
                     $this.parent.trigger('component.'+mode);
                 }
             });
