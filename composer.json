@@ -1,0 +1,23 @@
+{
+    "name": "raffaelj/cockpit-blockeditor",
+    "type": "cockpit-module",
+    "description": "A visual block editor for Cockpit CMS",
+    "keywords": ["cockpit", "editor", "wysiwyg"],
+    "homepage": "https://github.com/raffaelj/cockpit_BlockEditor",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raffael Jesche",
+            "homepage": "https://www.rlj.me"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.9"
+    },
+    "config": {
+        "vendor-dir": "lib/vendor"
+    },
+    "extra": {
+        "installer-name": "BlockEditor"
+    }
+}
