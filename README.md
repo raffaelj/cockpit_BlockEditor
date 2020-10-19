@@ -25,18 +25,41 @@ Please report bugs and send feedback in the [issues section][8] or in the [Cockp
 
 Copy this repository into `/addons` and name it `BlockEditor` or use the cli.
 
-git installation:
+### via git
 
 ```bash
 cd path/to/cockpit
 git clone https://github.com/raffaelj/cockpit_BlockEditor.git addons/BlockEditor
 ```
 
-cp cli installation:
+### via cp cli
 
 ```bash
 cd path/to/cockpit
 ./cp install/addon --name BlockEditor --url https://github.com/raffaelj/cockpit_BlockEditor/archive/master.zip
+```
+
+### via composer
+
+Make sure, that the path to cockpit addons is defined in your projects' `composer.json` file.
+
+```json
+{
+    "name": "my/cockpit-project",
+    "extra": {
+        "installer-paths": {
+            "addons/{$name}": ["type:cockpit-module"]
+        }
+    }
+}
+```
+
+```bash
+cd path/to/cockpit-root
+composer create-project --ignore-platform-reqs aheinze/cockpit .
+composer config extra.installer-paths.addons/{\$name} "type:cockpit-module"
+
+composer require --ignore-platform-reqs raffaelj/cockpit-blockeditor
 ```
 
 ## Overwrite block templates
